@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +13,13 @@ public class Player : MonoBehaviour
 
     public float velocidade;
 
+    public Animator animador;
+
+    public TMP_Text pontuacao;
+
+    float qtdpontuacao;
+    float tempopontuacao;
+    string qtdzeros = "0";
 
     Vector3 andarfrente;
     Vector3 andaresquerda;
@@ -23,13 +32,22 @@ public class Player : MonoBehaviour
     public float gravityforce;
 
 
+    float tempoanimacao;
     bool direita;
     bool esquerda;
+    bool noar;
 
     // Start is called before the first frame update
+    private void OnCollisionEnter(Collision collision)
+    {
+        noar = false;
+    }
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        
         Time.timeScale = 1;
         posicao = 0;
     }
@@ -37,6 +55,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        tempopontuacao = Time.deltaTime + tempopontuacao;
+
+
+
         ir_para_frente = new Vector3(rb.velocity.x,rb.velocity.y,1*velocidade);
 
         rb.velocity = ir_para_frente;
@@ -45,6 +67,7 @@ public class Player : MonoBehaviour
         if (tempo > 0.1f)
         {
             tempo = 0;
+            
             if (Time.timeScale < 1.5f)
             {
                 Time.timeScale = Time.timeScale + 0.0002f;
@@ -56,8 +79,12 @@ public class Player : MonoBehaviour
             }
 
         }
-        print(Time.timeScale);
 
+
+        
+
+
+        
 
         andaresquerda = new Vector3(-7, transform.position.y, transform.position.z);
         andardireita = new Vector3(7, transform.position.y, transform.position.z);
@@ -66,57 +93,81 @@ public class Player : MonoBehaviour
 
         pulo = new Vector3(rb.velocity.x, forcapulo, rb.velocity.z);
 
-
+        int estado = animador.GetInteger("estado");
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             esquerda = true;
+            estado = 3;
+
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             direita = true;
+            estado = 2;
         }
 
-
-
-        if (direita)
+        if (Input.GetKeyDown(KeyCode.Space)) 
         {
-            direita = false;
-            if (posicao == 0)
-            {
-                transform.position = andardireita;
-                posicao = 1;
-            }
-            else if (posicao == 2)
-            {
-                transform.position = andarmeio;
-                posicao = 0;
-            }
-
+            noar = true;
+            estado = 1;
         }
-        if (esquerda)
+
+
+        if (estado != 0) 
         {
-            esquerda = false;
-            if (posicao == 0)
+            tempoanimacao = tempoanimacao + Time.deltaTime;
+           
+
+            if (tempoanimacao > 0.25f) 
             {
-                transform.position = andaresquerda;
-                posicao = 2;
-            }
-            else if (posicao == 1)
-            {
-                transform.position = andarmeio;
-                posicao = 0;
+                if (estado == 1) 
+                {
+                rb.AddForce(pulo,ForceMode.Impulse);
+                }
+               
+                if (direita)
+                {
+                    direita = false;
+                    if (posicao == 0)
+                    {
+                        transform.position = andardireita;
+                        posicao = 1;
+                    }
+                    else if (posicao == 2)
+                    {
+                        transform.position = andarmeio;
+                        posicao = 0;
+                    }
+
+                }
+                if (esquerda)
+                {
+                    esquerda = false;
+                    if (posicao == 0)
+                    {
+                        transform.position = andaresquerda;
+                        posicao = 2;
+                    }
+                    else if (posicao == 1)
+                    {
+                        transform.position = andarmeio;
+                        posicao = 0;
+                    }
+                }
+                tempoanimacao = 0;
+                estado = 0;
             }
         }
 
+        
+       
 
 
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(pulo, ForceMode.Impulse);
-        }
+
+        
 
 
         rb.AddForce(Vector3.down * gravityforce);
@@ -126,7 +177,7 @@ public class Player : MonoBehaviour
 
 
 
-
+        animador.SetInteger("estado", estado);
     }
 
 }
