@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -222,7 +222,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileprefabs:
   - {fileID: 5587604018429652118, guid: 7cb33a97dd0bc2147874dab39ced2368, type: 3}
-  - {fileID: 767152804422691920, guid: 93744067190cbef4f9d6a8cd8870f109, type: 3}
 --- !u!4 &500561977
 Transform:
   m_ObjectHideFlags: 0
@@ -602,7 +601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.037255388, y: 0, z: 0, w: 0.9993058}
-  m_LocalPosition: {x: 0, y: 5.9106274, z: -15.258488}
+  m_LocalPosition: {x: 0, y: 5.9106274, z: -41.698486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1066,7 +1065,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5627306, y: 1}
+    m_SensorSize: {x: 0.5626959, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1083,7 +1082,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673956615}
   m_LocalRotation: {x: 0.037255388, y: -0, z: -0, w: 0.9993058}
-  m_LocalPosition: {x: 0, y: 5.9106274, z: -15.258488}
+  m_LocalPosition: {x: 0, y: 5.9106274, z: -41.698486}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1125,7 +1124,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!114 &1696487062
@@ -1143,9 +1142,9 @@ MonoBehaviour:
   tempo: 0
   velocidade: 30
   animador: {fileID: 1819257249}
-  velocidade_mov: 20
+  velocidade_mov: 10
   pontuacao: {fileID: 1120031399}
-  posicao: 0
+  posicao: 1
   forcapulo: 40
   gravityforce: 10
 --- !u!136 &1696487063
@@ -1155,7 +1154,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696487060}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 03c0a29f472887947bfe22260965a715, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -1220,7 +1219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696487060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: -26.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1258,7 +1257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6087188086162675386, guid: 7cb33a97dd0bc2147874dab39ced2368, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 6087188086162675386, guid: 7cb33a97dd0bc2147874dab39ced2368, type: 3}
       propertyPath: m_LocalRotation.w
