@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public float velocidade;
 
     public Animator animador;
+    public float velocidade_mov; 
 
     public TMP_Text pontuacao;
 
@@ -86,8 +87,8 @@ public class Player : MonoBehaviour
 
         
 
-        andaresquerda = new Vector3(-7, transform.position.y, transform.position.z);
-        andardireita = new Vector3(7, transform.position.y, transform.position.z);
+        andaresquerda = new Vector3(-3.5f, transform.position.y, transform.position.z);
+        andardireita = new Vector3(3.5f, transform.position.y, transform.position.z);
         andarmeio = new Vector3(0, transform.position.y, transform.position.z);
 
 
@@ -131,12 +132,14 @@ public class Player : MonoBehaviour
                     direita = false;
                     if (posicao == 0)
                     {
-                        transform.position = andardireita;
+                        rb.MovePosition(andardireita);
                         posicao = 1;
+   
                     }
                     else if (posicao == 2)
                     {
-                        transform.position = andarmeio;
+                        rb.MovePosition(andarmeio);
+
                         posicao = 0;
                     }
 
@@ -146,12 +149,13 @@ public class Player : MonoBehaviour
                     esquerda = false;
                     if (posicao == 0)
                     {
-                        transform.position = andaresquerda;
+                        rb.MovePosition(andaresquerda);
                         posicao = 2;
+
                     }
                     else if (posicao == 1)
                     {
-                        transform.position = andarmeio;
+                        rb.MovePosition(andarmeio);
                         posicao = 0;
                     }
                 }
