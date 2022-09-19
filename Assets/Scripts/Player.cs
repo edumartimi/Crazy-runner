@@ -37,7 +37,16 @@ public class Player : MonoBehaviour
     bool noar;
 
     int estado;
+    
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "chao") 
+        {
+        estado = 0;
+        }
+    }
 
 
     void Start()
@@ -54,9 +63,8 @@ public class Player : MonoBehaviour
     {
         //variaveis animação
         animador.SetInteger("estado", estado);
-
-
-
+        animador.SetFloat("velocityY", rb.velocity.y);
+       
 
 
 
@@ -90,7 +98,7 @@ public class Player : MonoBehaviour
 
         andaresquerda = new Vector3(-3.5f, transform.position.y, transform.position.z);
         andardireita = new Vector3(3.5f, transform.position.y, transform.position.z);
-        andarmeio = new Vector3(0, transform.position.y, transform.position.z);
+        andarmeio = new Vector3(0, rb.velocity.y, transform.position.z);
         andarfrente = new Vector3(0, rb.velocity.y, velocidade);
         pulo = new Vector3(rb.velocity.x, forcapulo, rb.velocity.z);
 
@@ -113,7 +121,7 @@ public class Player : MonoBehaviour
 
         if (direita)
         {
-            rb.velocity = Vector3.right * velocidade_mov;
+            rb.AddForce(Vector3.right * velocidade_mov);
             if (posicao == 0)
             {               
                 posicao = 2;
@@ -128,7 +136,8 @@ public class Player : MonoBehaviour
 
         if (esquerda)
         {
-            rb.velocity = Vector3.left * velocidade_mov;
+            rb.AddForce(Vector3.left  * velocidade_mov);
+            //rb.velocity = Vector3.left * velocidade_mov;
             if (posicao == 0)
             {
                 posicao = 3;
@@ -144,18 +153,14 @@ public class Player : MonoBehaviour
 
         if (posicao == 2 && transform.position.x > andardireita.x) 
         {           
-                estado = 0;
+            estado = 0;
             rb.velocity = andarfrente;
-           
-            
         }
 
         if (posicao == 0 && transform.position.x > -0.1 && transform.position.x < 0.1)
         {           
-                estado = 0;
+            estado = 0;
             rb.velocity = andarfrente;
-            
-
         }
 
         if (posicao == 3 && transform.position.x < andaresquerda.x)
@@ -169,7 +174,10 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(pulo , ForceMode.Impulse );
+            
         }
+
+
 
 
 
