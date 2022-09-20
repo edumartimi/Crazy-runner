@@ -6,6 +6,7 @@ TagManager:
   tags:
   - chao
   - ui_moedas
+  - obstaculo
   layers:
   - Default
   - TransparentFX
