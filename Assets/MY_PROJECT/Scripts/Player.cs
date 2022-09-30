@@ -21,9 +21,9 @@ public class Player : MonoBehaviour
     float tempopontuacao;
 
     Vector3 andarfrente;
-    Vector3 andaresquerda;
-    Vector3 andardireita;
-    Vector3 andarmeio;
+    Vector3 posicaoesquerda;
+    Vector3 posicaodireita;
+    Vector3 posicaomeio;
     Vector3 ir_para_baixo;
 
     Vector3 pulo;
@@ -105,81 +105,51 @@ public class Player : MonoBehaviour
         animador.SetFloat("velocityY", rb.velocity.y);
         animador.SetBool("tanochao", tanochao);
 
+        estado = 0;
 
 
         Swipe();
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                esquerda = true;
-                estado = 2;
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                direita = true;
-                estado = 1;
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                animador.SetTrigger("cambalhota");
-            }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                pulando = true;
-
-            }
-
-            if (posicao == 2 && transform.position.x > andardireita.x)
-            {
-                estado = 0;
-                rb.velocity = andarfrente;
-            }
-
-            if (posicao == 0 && transform.position.x > -0.1 && transform.position.x < 0.1)
-            {
-                estado = 0;
-                rb.velocity = andarfrente;
-            }
-
-            if (posicao == 3 && transform.position.x < andaresquerda.x)
-            {
-                estado = 0;
-                rb.velocity = andarfrente;
-            }
-
-        
-      
-
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            esquerda = true;
+            estado = 2;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            direita = true;
+            estado = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            animador.SetTrigger("cambalhota");
+            rb.AddForce(new Vector3(0, -30, 0), ForceMode.Impulse);
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && tanochao)
+        {
+            pulando = true;
+        }
+        if (pulando)
+        {
+            pulando = false;
+            rb.AddForce(pulo, ForceMode.Impulse);
+        }
     }
 
     private void FixedUpdate()
     {
-        //gravidade
-        rb.AddForce(new Vector3(rb.velocity.x, graviteforce));
-
         if (!morte)
         {
-            
-
-            
-
-
-
-
+            rb.AddForce(new Vector3(0, graviteforce, 0), ForceMode.Force);
 
             //ir pra frente e acelerar
-            ir_para_frente = new Vector3(rb.velocity.x,0, 1 * velocidade);
+            ir_para_frente = new Vector3(rb.velocity.x, rb.velocity.y, 1 * velocidade);
 
             rb.velocity = ir_para_frente;
             tempo = tempo + Time.deltaTime;
             if (tempo > 0.1f)
             {
                 tempo = 0;
-
-                if (Time.timeScale < 1.5f)
-                {
-                    Time.timeScale = Time.timeScale + 0.0002f;
-                }
                 if (velocidade < 40)
                 {
                     velocidade = velocidade + 0.005f;
@@ -188,86 +158,52 @@ public class Player : MonoBehaviour
             }
             //-------------------------------------------------------------------------------------------------------------------------
 
-
-
-
             //ir para os lados
 
-            andaresquerda = new Vector3(-3.5f,0, transform.position.z);
-            andardireita = new Vector3(3.5f, 0, transform.position.z);
-            andarmeio = new Vector3(0, 0, transform.position.z);
+            posicaoesquerda = new Vector3(-3.5f, transform.position.y, transform.position.z);
+            posicaodireita = new Vector3(3.5f, transform.position.y, transform.position.z);
+            posicaomeio = new Vector3(0, transform.position.y, transform.position.z);
             andarfrente = new Vector3(0, 0, velocidade);
-            pulo = new Vector3(0, forcapulo,0);
+            pulo = new Vector3(0, forcapulo, 0);
             ir_para_baixo = new Vector3(rb.velocity.x, -10, rb.velocity.z);
 
 
+            print(posicao);
 
-           
-
-
-
-            if (direita)
+            if (esquerda) 
             {
-                
                 if (posicao == 0)
                 {
-                    posicao = 2;
+                    rb.MovePosition(posicaoesquerda);
+                    posicao = 1;
                 }
-                else if (posicao == 3)
+                else if (posicao == 2) 
                 {
-                    posicao = 0;
-                }
-                direita = false;
-                rb.velocity = Vector3.right * velocidade_mov;
-            }
-
-
-            if (esquerda)
-            {
-                
-                if (posicao == 0)
-                {
-                    posicao = 3;
-                }
-                else if (posicao == 2)
-                {
+                    rb.MovePosition(posicaomeio);
                     posicao = 0;
                 }
                 esquerda = false;
-
-
-                rb.velocity = Vector3.left * velocidade_mov;
             }
 
-
-
-           
-           
-            //===============================================================================================================================
-
-            //pulo
-            if (pulando) 
+            if (direita)
             {
-                pulando = false;
-                rb.AddForce(pulo, ForceMode.Impulse);
+                if (posicao == 0)
+                {
+                    rb.MovePosition(posicaodireita);
+                    posicao = 2;
+                }
+                else if (posicao == 1)
+                {
+                    rb.MovePosition(posicaomeio);
+                    posicao = 0;
+                }
+                direita = false;
             }
 
 
-
-
-
-            //===============================================================================================================================
-
-        }
-
-
-        
-
-
-
-      
+        }      
     }
-    
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     public void Swipe()
     {
