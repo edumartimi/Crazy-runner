@@ -7,14 +7,17 @@ TagManager:
   - chao
   - ui_moedas
   - obstaculo
+  - lateral_esq
+  - lateral_dir
+  - gadget
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Detector
   - Water
   - UI
-  - 
+  - Gadget
   - 
   - 
   - 

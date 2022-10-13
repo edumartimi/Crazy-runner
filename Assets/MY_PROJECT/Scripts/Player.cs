@@ -27,17 +27,21 @@ public class Player : MonoBehaviour
     Vector3 ir_para_baixo;
 
     Vector3 pulo;
+    Vector3 forsuperpulo;
     public float posicao;
     public float forcapulo;
     public float graviteforce;
     bool tanochao;
+    bool superpulo;
 
 
     float tempoanimacao;
     bool direita;
     bool esquerda;
     bool noar;
-
+    bool temlateral_dir;
+    bool temlateral_esq;
+    int contador_morte;
 
 
     int estado;
@@ -61,11 +65,43 @@ public class Player : MonoBehaviour
         {
         estado = 0;
         }
-
+       
         if(collision.gameObject.tag == "obstaculo") 
         {
             morte = true;
             animador.SetTrigger("morte");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "SUPER_PULO") 
+        {
+            superpulo = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "lateral_dir")
+        {
+            temlateral_dir = true;
+        }
+        if (other.gameObject.tag == "lateral_esq")
+        {
+            temlateral_esq = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "lateral_dir")
+        {
+            temlateral_dir = false;
+        }
+        if (other.gameObject.tag == "lateral_esq")
+        {
+            temlateral_esq = false;
         }
     }
 
@@ -82,6 +118,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "chao")
         {
             tanochao = false;
+            contador_morte = 0;
         }
     }
 
@@ -90,9 +127,10 @@ public class Player : MonoBehaviour
     {
         morte=false;
         rb = GetComponent<Rigidbody>();
-        Time.timeScale = 1;
+        Time.timeScale = 0;
         posicao = 0;
         tanochao = false;
+        superpulo = false;
     }
 
     
@@ -100,6 +138,12 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (contador_morte >= 2) 
+        {
+            morte = true;
+        }
+
+        
         //variaveis animação
         animador.SetInteger("estado", estado);
         animador.SetFloat("velocityY", rb.velocity.y);
@@ -110,29 +154,42 @@ public class Player : MonoBehaviour
 
         Swipe();
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && !temlateral_esq)
         {
             esquerda = true;
             estado = 2;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if(Input.GetKeyDown(KeyCode.LeftArrow) && temlateral_esq)
+        {
+            contador_morte++;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow) && !temlateral_dir)
         {
             direita = true;
             estado = 1;
         }
+        else if (Input.GetKeyDown(KeyCode.RightArrow) && temlateral_dir)
+        {
+            contador_morte++;
+        }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             animador.SetTrigger("cambalhota");
-            rb.AddForce(new Vector3(0, -30, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, -200, 0), ForceMode.Impulse);
         }
         if (Input.GetKeyDown(KeyCode.Space) && tanochao)
         {
             pulando = true;
         }
-        if (pulando)
+        if (pulando && !superpulo)
         {
             pulando = false;
             rb.AddForce(pulo, ForceMode.Impulse);
+        }
+        else if(pulando && superpulo)
+        {
+            pulando = false;
+            rb.AddForce(forsuperpulo, ForceMode.Impulse);
         }
     }
 
@@ -165,10 +222,9 @@ public class Player : MonoBehaviour
             posicaomeio = new Vector3(0, transform.position.y, transform.position.z);
             andarfrente = new Vector3(0, 0, velocidade);
             pulo = new Vector3(0, forcapulo, 0);
+            forsuperpulo = new Vector3(0, forcapulo * 1.3f, 0);
             ir_para_baixo = new Vector3(rb.velocity.x, -10, rb.velocity.z);
 
-
-            print(posicao);
 
             if (esquerda) 
             {
@@ -233,13 +289,13 @@ public class Player : MonoBehaviour
                 }
                 else if (Distance.y < -swipeRange)
                 {
-                    rb.AddForce(ir_para_baixo, ForceMode.Impulse);
+                    rb.AddForce(new Vector3(0, -200, 0), ForceMode.Impulse);
                     animador.SetTrigger("cambalhota");
                     stopTouch = true;
                 }
-                else if (Distance.y > swipeRange) 
+                else if (Distance.y > swipeRange && tanochao) 
                 {
-                    rb.AddForce(pulo, ForceMode.Impulse);
+                    pulando = true;
                     stopTouch = true;
                 }
             }
@@ -260,6 +316,8 @@ public class Player : MonoBehaviour
         
     }
 
+
+   
     
 }
 
