@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.8196829, g: 0.8581947, b: 0.8308597, a: 1}
+  m_IndirectSpecularColor: {r: 0.8203874, g: 0.85901505, b: 0.83152735, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -357,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileprefabs:
   - {fileID: 4059951210719799297, guid: 06498c462000c7f4fbebd6d7cf4fec81, type: 3}
+  - {fileID: 5712292943356665426, guid: 9d38623f47b2de04ea84f9b118bf2e50, type: 3}
 --- !u!4 &500561977
 Transform:
   m_ObjectHideFlags: 0
@@ -1049,14 +1050,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 7b35f6ae2a964dd41b9c560b764c6fb5, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -1157,7 +1158,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 106.4
+  m_fontSize: 106.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1717,7 +1718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.448, y: 0.94200003}
   m_AnchorMax: {x: 0.551, y: 0.9834792}
-  m_AnchoredPosition: {x: 1.5928, y: 0}
+  m_AnchoredPosition: {x: 1.5927963, y: 0}
   m_SizeDelta: {x: -3.1856003, y: -2.5272827}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1377063014
@@ -2000,7 +2001,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5618153, y: 1}
+    m_SensorSize: {x: 0.5627306, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2167,7 +2168,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 69.1
+  m_fontSize: 68.95
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
