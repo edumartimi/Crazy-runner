@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     Vector3 ir_para_frente;
 
     public float tempo;
-
     public float velocidade;
 
     public Animator animador;
@@ -33,6 +32,7 @@ public class Player : MonoBehaviour
     public float graviteforce;
     bool tanochao;
     bool superpulo;
+    float TimeSpPulo;
 
 
     float tempoanimacao;
@@ -47,6 +47,8 @@ public class Player : MonoBehaviour
     int estado;
     bool morte;
 
+    int dispontuacao;
+    Vector3 lugarinicial;
 
     private Vector2 startTouchPosition;
     private Vector2 currentPosition;
@@ -57,6 +59,8 @@ public class Player : MonoBehaviour
     public float tapRange;
 
     bool pulando;
+
+    public GameObject TempoPoder;
 
     
     private void OnCollisionEnter(Collision collision)
@@ -131,17 +135,41 @@ public class Player : MonoBehaviour
         posicao = 0;
         tanochao = false;
         superpulo = false;
-    }
+        TempoPoder.SetActive(false);
+        lugarinicial = transform.position;
+}
 
     
 
 
     void Update()
     {
+
+        dispontuacao = System.Convert.ToInt32(transform.position.z - lugarinicial.z);
+
+        Contarpontuacao(dispontuacao);
+
+
         if (contador_morte >= 2) 
         {
             morte = true;
         }
+        
+        if (superpulo) 
+        {
+            TempoPoder.SetActive(true);
+            TimeSpPulo = TimeSpPulo + Time.deltaTime;
+            TempoPoder.GetComponent<Scrollbar>().size = TimeSpPulo * 0.2f;
+            if (TimeSpPulo > 5) 
+            {
+                TimeSpPulo = 0;
+                superpulo =false;
+                TempoPoder.SetActive(false);
+            }
+        }
+
+
+
 
         
         //variaveis animação
@@ -207,11 +235,10 @@ public class Player : MonoBehaviour
             if (tempo > 0.1f)
             {
                 tempo = 0;
-                if (velocidade < 40)
+                if (velocidade < 80)
                 {
-                    velocidade = velocidade + 0.005f;
+                    velocidade = velocidade + 0.05f;
                 }
-
             }
             //-------------------------------------------------------------------------------------------------------------------------
 
@@ -316,6 +343,42 @@ public class Player : MonoBehaviour
         
     }
 
+
+    void Contarpontuacao(int numpontuacao) 
+    {
+        if (numpontuacao < 10) 
+        {
+            pontuacao.text = "0000000" + numpontuacao;
+        }
+        else if (numpontuacao<99)
+        {
+            pontuacao.text = "000000" + numpontuacao;
+        }
+        else if (numpontuacao <999)
+        {
+            pontuacao.text = "00000" + numpontuacao;
+        }
+        else if (numpontuacao < 9999)
+        {
+            pontuacao.text = "0000" + numpontuacao;
+        }
+        else if (numpontuacao < 99999)
+        {
+            pontuacao.text = "000" + numpontuacao;
+        }
+        else if (numpontuacao < 999999)
+        {
+            pontuacao.text = "00" + numpontuacao;
+        }
+        else if (numpontuacao < 9999999)
+        {
+            pontuacao.text = "0" + numpontuacao;
+        }
+        else if (numpontuacao < 999999999)
+        {
+            pontuacao.text = "" + numpontuacao;
+        }
+    }
 
    
     
