@@ -11,11 +11,15 @@ public class coin : MonoBehaviour
     int moedas;
     float tempogirar;
     float giro;
+    Player jogador;
+    bool chamou;
+    float autodestruir;
+      
     private void Start()
     {
         moedasUI = GameObject.FindGameObjectWithTag("ui_moedas");
         qtdmoedas = moedasUI.GetComponent<TMP_Text>();
-        
+        jogador = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,5 +44,18 @@ public class coin : MonoBehaviour
             tempogirar = 0;
         }
         transform.rotation = Quaternion.Euler(-90,giro,0);
+
+        if (jogador.IMADEMOEDAS) 
+        {
+            irparaplayer();
+        }
+
+    }
+
+    public void irparaplayer() 
+    {
+        if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position)<30) {
+            transform.position = Vector3.MoveTowards(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, 2f);
+        }
     }
 }

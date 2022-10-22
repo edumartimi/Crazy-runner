@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     bool tanochao;
     bool superpulo;
     float TimeSpPulo;
+    float TimeImaMoedas;
 
 
     float tempoanimacao;
@@ -61,6 +62,8 @@ public class Player : MonoBehaviour
     bool pulando;
 
     public GameObject TempoPoder;
+
+    public bool IMADEMOEDAS;
 
     
     private void OnCollisionEnter(Collision collision)
@@ -166,6 +169,21 @@ public class Player : MonoBehaviour
                 superpulo =false;
                 TempoPoder.SetActive(false);
             }
+        }
+
+        if (IMADEMOEDAS) 
+        {
+            TempoPoder.SetActive(true);
+            TimeImaMoedas = TimeImaMoedas + Time.deltaTime;
+            TempoPoder.GetComponent<Scrollbar>().size = TimeImaMoedas * 0.2f;
+            if (TimeImaMoedas > 20) 
+            {
+                TimeImaMoedas = 0;
+                IMADEMOEDAS = false;
+                TempoPoder.SetActive(false);
+            }
+
+
         }
 
 
