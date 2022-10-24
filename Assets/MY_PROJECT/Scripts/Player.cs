@@ -110,6 +110,12 @@ public class Player : MonoBehaviour
         {
             temlateral_esq = false;
         }
+
+        if (other.gameObject.tag == "coin") 
+        {
+            coin moeda = other.gameObject.GetComponent<coin>();
+            moeda.efeito.Play(1);
+        }
     }
 
     private void OnCollisionStay(Collision collision)

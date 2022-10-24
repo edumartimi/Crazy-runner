@@ -14,12 +14,14 @@ public class coin : MonoBehaviour
     Player jogador;
     bool chamou;
     float autodestruir;
+    public AudioSource efeito;
       
     private void Start()
     {
         moedasUI = GameObject.FindGameObjectWithTag("ui_moedas");
         qtdmoedas = moedasUI.GetComponent<TMP_Text>();
         jogador = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        efeito = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
