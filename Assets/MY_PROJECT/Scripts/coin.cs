@@ -12,16 +12,12 @@ public class coin : MonoBehaviour
     float tempogirar;
     float giro;
     Player jogador;
-    bool chamou;
-    float autodestruir;
-    public AudioSource efeito;
       
     private void Start()
     {
         moedasUI = GameObject.FindGameObjectWithTag("ui_moedas");
         qtdmoedas = moedasUI.GetComponent<TMP_Text>();
         jogador = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        efeito = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,13 +25,15 @@ public class coin : MonoBehaviour
        
         if (other.gameObject.tag == "Player") 
         {
+            jogador.tocarmoeda();
             moedas = System.Int32.Parse(qtdmoedas.text);
             moedas++;
             qtdmoedas.text = "" + moedas;
-           
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
+
+
 
     private void FixedUpdate()
     {
@@ -57,7 +55,7 @@ public class coin : MonoBehaviour
     public void irparaplayer() 
     {
         if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position)<30) {
-            transform.position = Vector3.MoveTowards(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, 2f);
+            transform.position = Vector3.MoveTowards(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position + Vector3.up, 2f);
         }
     }
 }

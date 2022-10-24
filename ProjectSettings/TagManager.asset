@@ -10,6 +10,7 @@ TagManager:
   - lateral_esq
   - lateral_dir
   - gadget
+  - coin
   layers:
   - Default
   - TransparentFX

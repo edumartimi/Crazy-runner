@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     Rigidbody rb;
     Vector3 ir_para_frente;
 
+
     public float tempo;
     public float velocidade;
 
@@ -43,7 +44,11 @@ public class Player : MonoBehaviour
     bool temlateral_dir;
     bool temlateral_esq;
     int contador_morte;
-
+    public int multiplicador;
+    public int pontuacaoaumentada;
+    public bool pwmultiplicador;
+    public Vector3 pos_X2;
+    public int multiplicadorguardado;
 
     int estado;
     bool morte;
@@ -65,7 +70,9 @@ public class Player : MonoBehaviour
 
     public bool IMADEMOEDAS;
 
-    
+    public AudioSource efeito;
+
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "chao") 
@@ -86,6 +93,7 @@ public class Player : MonoBehaviour
         {
             superpulo = true;
         }
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -109,12 +117,6 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "lateral_esq")
         {
             temlateral_esq = false;
-        }
-
-        if (other.gameObject.tag == "coin") 
-        {
-            coin moeda = other.gameObject.GetComponent<coin>();
-            moeda.efeito.Play(1);
         }
     }
 
@@ -153,9 +155,21 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (pwmultiplicador)
+        {
+            pontuacaoaumentada = System.Convert.ToInt32(transform.position.z - pos_X2.z) * multiplicador;
+            dispontuacao = System.Convert.ToInt32(transform.position.z - lugarinicial.z) + pontuacaoaumentada;
+        }
+        else 
+        {
+            multiplicadorguardado += pontuacaoaumentada;
+            dispontuacao = System.Convert.ToInt32(transform.position.z - lugarinicial.z) + multiplicadorguardado;
+            pontuacaoaumentada = 0;
+        }
+        
 
-        dispontuacao = System.Convert.ToInt32(transform.position.z - lugarinicial.z);
 
+        
         Contarpontuacao(dispontuacao);
 
 
@@ -402,6 +416,11 @@ public class Player : MonoBehaviour
         {
             pontuacao.text = "" + numpontuacao;
         }
+    }
+
+    public void tocarmoeda() 
+    {
+        efeito.PlayOneShot(efeito.clip);
     }
 
    
