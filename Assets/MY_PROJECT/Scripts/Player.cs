@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
     public float posicao;
     public float forcapulo;
     public float graviteforce;
-    bool tanochao;
+    public bool tanochao;
     bool superpulo;
     float TimeSpPulo;
     float TimeImaMoedas;
@@ -137,6 +138,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        TempoPoder = GameObject.FindGameObjectWithTag("barra_poder");
+        pontuacao = GameObject.FindGameObjectWithTag("pontuacao").GetComponent<TMP_Text>();
+        efeito = GameObject.FindGameObjectWithTag("efeito_moedas").GetComponent<AudioSource>();
+    }
+
 
     void Start()
     {
@@ -182,7 +190,7 @@ public class Player : MonoBehaviour
         {
             TempoPoder.SetActive(true);
             TimeSpPulo = TimeSpPulo + Time.deltaTime;
-            TempoPoder.GetComponent<Scrollbar>().size = TimeSpPulo * 0.2f;
+            TempoPoder.GetComponent<Scrollbar>().size = 1/TimeSpPulo;
             if (TimeSpPulo > 5) 
             {
                 TimeSpPulo = 0;
@@ -195,7 +203,7 @@ public class Player : MonoBehaviour
         {
             TempoPoder.SetActive(true);
             TimeImaMoedas = TimeImaMoedas + Time.deltaTime;
-            TempoPoder.GetComponent<Scrollbar>().size = TimeImaMoedas * 0.2f;
+            TempoPoder.GetComponent<Scrollbar>().size = 1/TimeImaMoedas;
             if (TimeImaMoedas > 20) 
             {
                 TimeImaMoedas = 0;
