@@ -11,6 +11,9 @@ TagManager:
   - lateral_dir
   - gadget
   - coin
+  - pontuacao
+  - efeito_moedas
+  - barra_poder
   layers:
   - Default
   - TransparentFX

@@ -9,9 +9,13 @@ public class GameManager : MonoBehaviour
     [Header("Game Configuration")]
     public int target_FPS = 60;
     public GameObject imagem;
+    public int numeroPlayer;
+
+    public GameObject[] Jogadores;
 
     private void Awake()
     {
+        Instantiate(Jogadores[numeroPlayer],this.transform);
         Application.targetFrameRate = target_FPS;
     }
   
