@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     public bool pwmultiplicador;
     public Vector3 pos_X2;
     public int multiplicadorguardado;
+    public int showpontuacao;
 
     int estado;
     bool morte;
@@ -155,22 +156,20 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (pwmultiplicador)
+        dispontuacao = System.Convert.ToInt32(transform.position.z - lugarinicial.z) + pontuacaoaumentada;
+        if (dispontuacao % 4 == 1 && !pwmultiplicador) 
         {
-            pontuacaoaumentada = System.Convert.ToInt32(transform.position.z - pos_X2.z) * multiplicador;
-            dispontuacao = System.Convert.ToInt32(transform.position.z - lugarinicial.z) + pontuacaoaumentada;
+            showpontuacao += 1;
         }
-        else 
+        else if(dispontuacao % 4 == 1 && pwmultiplicador) 
         {
-            multiplicadorguardado += pontuacaoaumentada;
-            dispontuacao = System.Convert.ToInt32(transform.position.z - lugarinicial.z) + multiplicadorguardado;
-            pontuacaoaumentada = 0;
+            showpontuacao += 2;
         }
         
 
 
-        
-        Contarpontuacao(dispontuacao);
+
+        Contarpontuacao(showpontuacao);
 
 
         if (contador_morte >= 2) 
