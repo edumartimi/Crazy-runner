@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int target_FPS = 60;
     public GameObject imagem;
     public int numeroPlayer;
+    public GameObject btn_reiniciar;
 
     public GameObject[] Jogadores;
 
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
         if (Time.timeScale == 1) 
         {
             Time.timeScale = 0;
+            btn_reiniciar.SetActive(true);
             imagem.SetActive(true);
         }
         else 
@@ -36,8 +38,14 @@ public class GameManager : MonoBehaviour
 
     public void reiniciar() 
     {
+        SceneManager.LoadScene(1);
+    }
+
+    public void iraomenu() 
+    {
         SceneManager.LoadScene(0);
     }
+
    
 
 }

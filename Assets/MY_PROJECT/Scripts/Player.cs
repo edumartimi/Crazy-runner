@@ -51,9 +51,10 @@ public class Player : MonoBehaviour
     public Vector3 pos_X2;
     public int multiplicadorguardado;
     public int showpontuacao;
+    public TMP_Text pontuacaomorte;
 
-    int estado;
     bool morte;
+    public GameObject menuMorte;
 
     int dispontuacao;
     Vector3 lugarinicial;
@@ -76,16 +77,11 @@ public class Player : MonoBehaviour
 
 
     private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "chao") 
-        {
-        estado = 0;
-        }
-       
-        if(collision.gameObject.tag == "obstaculo") 
+    {   
+        if(collision.gameObject.tag != "chao") 
         {
             morte = true;
-            animador.SetTrigger("morte");
+           
         }
     }
 
@@ -128,6 +124,8 @@ public class Player : MonoBehaviour
         {
             tanochao = true;
         }
+
+       
     }
 
     private void OnCollisionExit(Collision collision)
@@ -143,12 +141,15 @@ public class Player : MonoBehaviour
     {
         TempoPoder = GameObject.FindGameObjectWithTag("barra_poder");
         pontuacao = GameObject.FindGameObjectWithTag("pontuacao").GetComponent<TMP_Text>();
+        pontuacaomorte = GameObject.FindGameObjectWithTag("pontuacaomorte").GetComponent<TMP_Text>();
         efeito = GameObject.FindGameObjectWithTag("efeito_moedas").GetComponent<AudioSource>();
+        menuMorte = GameObject.FindGameObjectWithTag("menumorte");
     }
 
 
     void Start()
     {
+        menuMorte.SetActive(false);
         morte=false;
         rb = GetComponent<Rigidbody>();
         Time.timeScale = 0;
@@ -157,21 +158,31 @@ public class Player : MonoBehaviour
         superpulo = false;
         TempoPoder.SetActive(false);
         lugarinicial = transform.position;
-}
+        
+    }
 
     
 
 
     void Update()
     {
-        dispontuacao = System.Convert.ToInt32(transform.position.z - lugarinicial.z) + pontuacaoaumentada;
-        if (dispontuacao % 4 == 1 && !pwmultiplicador) 
+       
+        if (morte) 
         {
-            showpontuacao += 1;
+        menuMorte.SetActive(true);
+        animador.SetTrigger("morte");
         }
-        else if(dispontuacao % 4 == 1 && pwmultiplicador) 
+        if (!morte)
         {
-            showpontuacao += 2;
+            dispontuacao = System.Convert.ToInt32(transform.position.z - lugarinicial.z) + pontuacaoaumentada;
+            if (dispontuacao % 4 == 1 && !pwmultiplicador)
+            {
+                showpontuacao += 1;
+            }
+            else if (dispontuacao % 4 == 1 && pwmultiplicador)
+            {
+                showpontuacao += 2;
+            }
         }
         
 
@@ -218,11 +229,9 @@ public class Player : MonoBehaviour
 
         
         //variaveis animação
-        animador.SetInteger("estado", estado);
         animador.SetFloat("velocityY", rb.velocity.y);
         animador.SetBool("tanochao", tanochao);
 
-        estado = 0;
 
 
         Swipe();
@@ -230,7 +239,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow) && !temlateral_esq)
         {
             esquerda = true;
-            estado = 2;
         }
         else if(Input.GetKeyDown(KeyCode.LeftArrow) && temlateral_esq)
         {
@@ -239,7 +247,6 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow) && !temlateral_dir)
         {
             direita = true;
-            estado = 1;
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow) && temlateral_dir)
         {
@@ -268,6 +275,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        pontuacaomorte.text = pontuacao.text;
         if (!morte)
         {
             rb.AddForce(new Vector3(0, graviteforce, 0), ForceMode.Force);
@@ -350,13 +358,11 @@ public class Player : MonoBehaviour
                 if (Distance.x < -swipeRange)
                 {
                     esquerda = true;
-                    estado = 2;
                     stopTouch = true;
                 }
                 else if (Distance.x > swipeRange)
                 {
                     direita = true;
-                    estado = 1;
                     stopTouch = true;
                 }
                 else if (Distance.y < -swipeRange)
@@ -423,6 +429,7 @@ public class Player : MonoBehaviour
         {
             pontuacao.text = "" + numpontuacao;
         }
+        
     }
 
     public void tocarmoeda() 
