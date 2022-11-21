@@ -10,7 +10,9 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Kalam
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4debd93fe372e1143a78d1927aaedf43, type: 3}
+  - {fileID: 12800000, guid: 1d25c3528222311439a5461238b0357f, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
