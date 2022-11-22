@@ -16,6 +16,7 @@ TagManager:
   - barra_poder
   - menumorte
   - pontuacaomorte
+  - configuracoes
   layers:
   - Default
   - TransparentFX
