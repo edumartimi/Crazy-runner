@@ -569,8 +569,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileprefabs:
-  - {fileID: 4059951210719799297, guid: 06498c462000c7f4fbebd6d7cf4fec81, type: 3}
   - {fileID: 5917841567991335768, guid: 3ba307f45467b5749a7ce6bd67d215c5, type: 3}
+  - {fileID: 4059951210719799297, guid: 06498c462000c7f4fbebd6d7cf4fec81, type: 3}
   - {fileID: 4059951210719799297, guid: df1ffa36035b3364bac03066c89bb45d, type: 3}
   - {fileID: 4059951210719799297, guid: 77838c8cde303aa4cb1279602b0f3155, type: 3}
   - {fileID: 4059951210719799297, guid: d8bf1a610c7ea87428c84fa9ab990c05, type: 3}
@@ -703,7 +703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.51412404, y: 0.134}
-  m_AnchoredPosition: {x: 9.281982, y: -14.639038}
+  m_AnchoredPosition: {x: 9.281982, y: -14.63916}
   m_SizeDelta: {x: -67.88, y: -106.538}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &545054685
@@ -837,7 +837,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.26539585}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.7348633, y: 0.23001099}
+  m_AnchoredPosition: {x: -1.7348633, y: 0.22998047}
   m_SizeDelta: {x: -2158.5, y: 0.45999146}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &595750956
@@ -1344,7 +1344,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674717931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
   m_Name: 
@@ -1646,7 +1646,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 106.4
+  m_fontSize: 106.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1972,6 +1972,7 @@ GameObject:
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   - component: {fileID: 963194231}
+  - component: {fileID: 963194232}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2083,7 +2084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 0
+  m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -2094,11 +2095,11 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
+  m_StopNaN: 1
+  m_Dithering: 1
   m_ClearDepth: 1
   m_AllowXRRendering: 1
   m_RequiresDepthTexture: 0
@@ -2112,6 +2113,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
+--- !u!114 &963194232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba770cbb75ab5344ab66f2af234641e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curveStrength: 0.0003
 --- !u!1 &966579718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2259,6 +2273,7 @@ MonoBehaviour:
   Jogadores:
   - {fileID: 5206238075234010486, guid: 29eb8953599514642a67849e632e148c, type: 3}
   - {fileID: 3296760243067581363, guid: 6c378777e5d2025439bdfc085d82d4a7, type: 3}
+  Itens_menu: {fileID: 0}
 --- !u!4 &1176352920
 Transform:
   m_ObjectHideFlags: 0
@@ -3163,7 +3178,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.5617597, y: 1}
+    m_SensorSize: {x: 0.56213015, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3558,7 +3573,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64.5
+  m_fontSize: 64.45
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3696,7 +3711,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 94.1
+  m_fontSize: 94.05
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

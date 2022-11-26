@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] Jogadores;
 
+    public Menu_inicial Itens_menu;
+
     private void Awake()
     {
         Instantiate(Jogadores[numeroPlayer],this.transform);
