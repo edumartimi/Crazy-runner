@@ -943,7 +943,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6fe75f8b81c3b8e4bad90fcc0d44bc05, type: 2}
+  - {fileID: 2100000, guid: 96537affea4c76d40941ccc19c1fcc7e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1315,6 +1315,9 @@ MonoBehaviour:
   pwmultiplicador: 0
   pos_X2: {x: 0, y: 0, z: 0}
   multiplicadorguardado: 0
+  showpontuacao: 0
+  pontuacaomorte: {fileID: 0}
+  menuMorte: {fileID: 0}
   swipeRange: 100
   tapRange: 10
   TempoPoder: {fileID: 0}
