@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 3535f90b968e54b41a27a9191033429e
+guid: 7a8565a805e5f2e4086c98dd2b7b85a2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
+    second: Victory Idle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -20,14 +20,18 @@ ModelImporter:
     removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
+      copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
+      : position error = 45.312691 mm\n\t'mixamorig:LeftLeg' : position error = 37.326057
+      mm\n\t'mixamorig:LeftFoot' : position error = 137.908615 mm\n\t'mixamorig:LeftToeBase'
+      : position error = 14.576552 mm\n"
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -36,21 +40,21 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: mixamo.com
+      name: Victory Idle
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 958
+      lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 0

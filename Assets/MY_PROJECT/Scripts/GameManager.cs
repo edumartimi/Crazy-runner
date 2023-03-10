@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class GameManager : MonoBehaviour
 {
-    [Header("Game Configuration")]
     public int target_FPS = 60;
     public GameObject imagem;
     public int numeroPlayer;
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        numeroPlayer = gerenciador_troca.numplayer;
         Instantiate(Jogadores[numeroPlayer],this.transform);
         Application.targetFrameRate = target_FPS;
     }
